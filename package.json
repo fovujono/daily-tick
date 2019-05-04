@@ -1,0 +1,22 @@
+{
+  "name": "daily-tick",
+  "version": "1.0.0",
+  "description": "stopwatch/timer application made with electron.js",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smoothtacoman/daily-tick.git"
+  },
+  "author": "Juan Toledo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/smoothtacoman/daily-tick/issues"
+  },
+  "homepage": "https://github.com/smoothtacoman/daily-tick#readme",
+  "dependencies": {
+    "electron": "^5.0.1"
+  }
+}
