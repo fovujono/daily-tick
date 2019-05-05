@@ -20,6 +20,10 @@ app.on("ready", function() {
       slashes: true
     })
   );
+  //Close window when hitting X
+  mainWindow.on("close", function() {
+    app.quit();
+  });
 
   //Build menu from template
   const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
@@ -27,8 +31,7 @@ app.on("ready", function() {
   Menu.setApplicationMenu(mainMenu);
 });
 
-
- //Handle add window
+//Handle add window
 function createSetTimeWindow() {
   //Create New Window
   addWindow = new BrowserWindow({
@@ -44,6 +47,11 @@ function createSetTimeWindow() {
       slashes: true
     })
   );
+
+  //save memory when closed
+  addWindow.on("close", function() {
+    addWindow = null;
+  });
 }
 
 //Create menu template
@@ -68,3 +76,26 @@ const mainMenuTemplate = [
     ]
   }
 ];
+
+//if mac, add empty obj to main menu array
+
+if (process.platform == "darwin") {
+  mainMenuTemplate.unshift({});
+}
+
+//Dev tools item only not in production
+if (process.env.NODE_ENV !== "production") {
+  mainMenuTemplate.push({
+    label: "Dev Tools",
+    submenu: [
+      {
+        label: "Toggle Dev Tools",
+        //adding shortcut depending on OS
+        accelerator: process.platform == "darwin" ? "Command+I" : "Ctrl+I",
+        click(item, focusedWindow) {
+          focusedWindow.toggleDevTools();
+        }
+      }
+    ]
+  });
+}
